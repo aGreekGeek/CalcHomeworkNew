@@ -11,22 +11,16 @@ from calculator.calculation import Calculation  # Represents a single calculatio
 from decimal import Decimal  # For high-precision arithmetic
 from typing import Callable  # For type hinting callable objects
 
+# Definition of the Calculator class
 class Calculator:
     @staticmethod
     def _perform_operation(a: Decimal, b: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
-         """
-        Create and perform a calculation, then return the result.
-
-        Args:
-            a (Decimal): The first operand.
-            b (Decimal): The second operand.
-            operation (Callable): A callable representing the operation (add, subtract, etc.).
-
-        Returns:
-            Decimal: The result of the calculation.
-        """
+        """Create and perform a calculation, then return the result."""
+        # Create a Calculation object using the static create method, passing in operands and the operation
         calculation = Calculation.create(a, b, operation)
+        # Add the calculation to the history managed by the Calculations class
         Calculations.add_calculation(calculation)
+        # Perform the calculation and return the result
         return calculation.perform()
 
     @staticmethod
